@@ -41,7 +41,7 @@ mod UpgradeableComponent {
         fn _upgrade(ref self: ComponentState<TContractState>, new_class_hash: ClassHash) {
             assert(!new_class_hash.is_zero(), Errors::INVALID_CLASS);
             starknet::replace_class_syscall(new_class_hash).unwrap();
-            self.emit(Upgraded { class_hash: new_class_hash });
+            // self.emit(Upgraded { class_hash: new_class_hash });
         }
     }
 }
