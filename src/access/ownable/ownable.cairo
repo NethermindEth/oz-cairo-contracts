@@ -121,10 +121,10 @@ mod OwnableComponent {
         ) {
             let previous_owner: ContractAddress = self.Ownable_owner.read();
             self.Ownable_owner.write(new_owner);
-            self
-                .emit(
-                    OwnershipTransferred { previous_owner: previous_owner, new_owner: new_owner }
-                );
+//            self
+//                .emit(
+//                    OwnershipTransferred { previous_owner: previous_owner, new_owner: new_owner }
+//                );
         }
     }
 }
