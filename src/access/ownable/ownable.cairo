@@ -23,13 +23,22 @@ mod OwnableComponent {
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        OwnershipTransferred: OwnershipTransferred
+        OwnershipTransferred: OwnershipTransferred,
+        OwnershipTransferredTwo: OwnershipTransferredTwo,
     }
 
     #[derive(Drop, starknet::Event)]
     struct OwnershipTransferred {
         previous_owner: ContractAddress,
         new_owner: ContractAddress,
+    }
+
+    #[derive(Drop, starknet::Event)]
+    struct OwnershipTransferredTwo {
+        a: ContractAddress,
+        b: ContractAddress,
+        c: ContractAddress,
+        d: ContractAddress,
     }
 
     mod Errors {
@@ -121,10 +130,10 @@ mod OwnableComponent {
         ) {
             let previous_owner: ContractAddress = self.Ownable_owner.read();
             self.Ownable_owner.write(new_owner);
-//            self
-//                .emit(
-//                    OwnershipTransferred { previous_owner: previous_owner, new_owner: new_owner }
-//                );
+            self
+                .emit(
+                    OwnershipTransferred { previous_owner: previous_owner, new_owner: new_owner }
+                );
         }
     }
 }
