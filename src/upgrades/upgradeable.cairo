@@ -14,7 +14,8 @@ mod UpgradeableComponent {
     #[event]
     #[derive(Drop, starknet::Event)]
     enum Event {
-        Upgraded: Upgraded
+        Upgraded: Upgraded,
+        Upgraded1: Upgraded1
     }
 
     /// Emitted when the contract is upgraded.
@@ -22,6 +23,15 @@ mod UpgradeableComponent {
     struct Upgraded {
         class_hash: ClassHash
     }
+
+    #[derive(Drop, starknet::Event)]
+    struct Upgraded1 {
+        class_hash1: ClassHash,
+        class_hash2: ClassHash,
+        class_hash3: ClassHash,
+        class_hash4: ClassHash
+    }
+
 
     mod Errors {
         const INVALID_CLASS: felt252 = 'Class hash cannot be zero';
