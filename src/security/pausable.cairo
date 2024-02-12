@@ -76,7 +76,7 @@ mod PausableComponent {
         fn _pause(ref self: ComponentState<TContractState>) {
             self.assert_not_paused();
             self.Pausable_paused.write(true);
-            // self.emit(Paused { account: get_caller_address() });
+            self.emit(Paused { account: get_caller_address() });
         }
 
         /// Lifts the pause on the contract.
@@ -89,7 +89,7 @@ mod PausableComponent {
         fn _unpause(ref self: ComponentState<TContractState>) {
             self.assert_paused();
             self.Pausable_paused.write(false);
-            // self.emit(Unpaused { account: get_caller_address() });
+            self.emit(Unpaused { account: get_caller_address() });
         }
     }
 }

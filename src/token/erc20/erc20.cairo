@@ -276,7 +276,7 @@ mod ERC20Component {
             assert(!recipient.is_zero(), Errors::TRANSFER_TO_ZERO);
             self.ERC20_balances.write(sender, self.ERC20_balances.read(sender) - amount);
             self.ERC20_balances.write(recipient, self.ERC20_balances.read(recipient) + amount);
-            // self.emit(Transfer { from: sender, to: recipient, value: amount });
+            self.emit(Transfer { from: sender, to: recipient, value: amount });
         }
 
         /// Internal method that sets `amount` as the allowance of `spender` over the
@@ -297,7 +297,7 @@ mod ERC20Component {
             assert(!owner.is_zero(), Errors::APPROVE_FROM_ZERO);
             assert(!spender.is_zero(), Errors::APPROVE_TO_ZERO);
             self.ERC20_allowances.write((owner, spender), amount);
-            // self.emit(Approval { owner, spender, value: amount });
+            self.emit(Approval { owner, spender, value: amount });
         }
 
         /// Creates a `value` amount of tokens and assigns them to `account`.
@@ -313,7 +313,7 @@ mod ERC20Component {
             assert(!recipient.is_zero(), Errors::MINT_TO_ZERO);
             self.ERC20_total_supply.write(self.ERC20_total_supply.read() + amount);
             self.ERC20_balances.write(recipient, self.ERC20_balances.read(recipient) + amount);
-            // self.emit(Transfer { from: Zeroable::zero(), to: recipient, value: amount });
+            self.emit(Transfer { from: Zeroable::zero(), to: recipient, value: amount });
         }
 
         /// Destroys `amount` of tokens from `account`.
@@ -328,7 +328,7 @@ mod ERC20Component {
             assert(!account.is_zero(), Errors::BURN_FROM_ZERO);
             self.ERC20_total_supply.write(self.ERC20_total_supply.read() - amount);
             self.ERC20_balances.write(account, self.ERC20_balances.read(account) - amount);
-            // self.emit(Transfer { from: account, to: Zeroable::zero(), value: amount });
+            self.emit(Transfer { from: account, to: Zeroable::zero(), value: amount });
         }
 
         /// Internal method for the external `increase_allowance`.
